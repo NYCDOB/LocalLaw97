@@ -136,7 +136,7 @@
 <!-- Promise polyfill script required to use Mapbox GL Geocoder in IE 11 -->
 <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
-
+<script src="https://unpkg.com/geojson-vt@3.2.0/geojson-vt.js"></script>
 
 
 <script>
@@ -150,71 +150,56 @@ var map = new mapboxgl.Map({
     zoom: 12
 });
 
+var clickStateId = null;
+
 map.on('load', function () {
-	
-	map.addLayer({
-		"id": "LL97_Lots",
-		"type": "fill",
-		"source": {
-		type: 'vector',
-		url: 'mapbox://bmancell.5rpjki6i'
-		},
-		"source-layer": "LL97_MapPLUTO_includingExempt-11yht6",
-		"paint": {
-			'fill-color': '#fcf403',
-			'fill-opacity': 0.3
-		}		
-	});	
 
 	map.addSource('bldgSource2', {
 		'type': 'geojson',
-		'data': 'data/LL97_MapPLUTO_excludingExemptions3_6_WGS.json'
+		'data': 'data/LL97_MapPLUTO_excludingExemptions3_6_WGS.json',
+		'generateId': true
 	})
+
 	map.addLayer({
 		'id': 'bldg-layer2',
 		'source': 'bldgSource2',
 		'type': 'fill',
-		'maxzoom': 12,
 		"paint": {
-			'fill-color': '#fcf403',
-			'fill-opacity': 0.3
+			'fill-opacity': 0.3,
+			'fill-color': ["case",
+				["boolean", ["feature-state", "click"], false],
+				'#0df7ff',
+				'#fcf403'
+				]			
 		}	
 	})
 
-
+	map.on("click", "bldg-layer2", function(e) {
+		if (e.features.length > 0) {
+		console.log(e.features[0])
+			if (clickStateId) {
+				map.setFeatureState({source: 'bldgSource2', id: clickStateId}, { click: false});
+			}
+			clickStateId = e.features[0].id;
+			map.setFeatureState({source: 'bldgSource2', id: clickStateId}, { click: true});
+		}
+		console.log('clickStateId = ',clickStateId)
+	});
 	
 });
-/*
-map.on('mousemove', function(e) {
-  var lots = map.queryRenderedFeatures(e.point, {
-    layers: ['LL97_Lots']
-  });
 
-  if (lots.length > 0) {
-    //document.getElementById('pd').innerHTML = 'BBL:' +'<h3>' + lots[0].properties.BBL + '</h3><p><em>' + lots[0].properties.Address + ' people per square mile</em></p>';
-	document.getElementById('pd').innerHTML = '<p>'+'BBL: ' +lots[0].properties.BBL +'</p>' + '<p>'+'Address: ' +lots[0].properties.Address + '</p>' + '<p>'+'Number of Buildings: ' +lots[0].properties.NumBldgs + '</p>'
-	+ '<p>'+'Gross Square Footage: ' +lots[0].properties.GrossSquar + '</p>'+ '<p>'+'Building Class: ' +lots[0].properties.BC + '</p>'+ '<p>'+'Tax Class: ' +lots[0].properties.TaxClass + '</p>';
-  } else {
-    document.getElementById('pd').innerHTML = '<p>Hover over a lot...</p>';
-  }
-});
-map.getCanvas().style.cursor = 'default';
-*/
+
 map.on('click', function(e) {
-  var lots = map.queryRenderedFeatures(e.point, {
-    layers: ['LL97_Lots']
-  });
+
   var lots_geojson = map.queryRenderedFeatures(e.point, {
     layers: ['bldg-layer2']
   });
-  if (lots.length > 0) {
-	document.getElementById('pd').innerHTML = '<p>'+'BBL: ' +lots[0].properties.BBL +'</p>' + '<p>'+'Borough: ' +lots[0].properties.Boro_1 +'</p>' + '<p>'+'Block: ' +lots[0].properties.Block_1 + '<p>'+'Lot: ' +lots[0].properties.Lot_1 +'</p>' +'</p>' +'<p>'+'Address: ' +lots[0].properties.Address + '<p>'+'Owner: ' +lots[0].properties.OwnerName +'</p>' +'</p>' + '<p>'+'Number of Buildings: ' +lots[0].properties.NumBldgs + '</p>'
-	+ '<p>'+'Gross Square Footage: ' +lots[0].properties.GrossSquar + '</p>'+ '<p>'+'Building Class: ' +lots[0].properties.BC + '</p>'+ '<p>'+'Tax Class: ' +lots[0].properties.TaxClass + '</p>';
-  }  else if (lots_geojson.length > 0) {
-	document.getElementById('pd').innerHTML = '<p>'+'BBL: ' +lots_geojson[0].properties.BBL +'</p>' + '<p>'+'Borough: ' +lots_geojson[0].properties.Boro_1 +'</p>' + '<p>'+'Block: ' +lots_geojson[0].properties.Block_1 + '<p>'+'Lot: ' +lots_geojson[0].properties.Lot_1 +'</p>' +'</p>' +'<p>'+'Address: ' +lots_geojson[0].properties.Address + '<p>'+'Owner: ' +lots_geojson[0].properties.OwnerName +'</p>' +'</p>' + '<p>'+'Number of Buildings: ' +lots_geojson[0].properties.NumBldgs + '</p>'
-	+ '<p>'+'Gross Square Footage: ' +lots_geojson[0].properties.GrossSquar + '</p>'+ '<p>'+'Building Class: ' +lots_geojson[0].properties.BC + '</p>'+ '<p>'+'Tax Class: ' +lots_geojson[0].properties.TaxClass + '</p>';
-  } else {
-    document.getElementById('pd').innerHTML = '<p>Click on a lot for details...</p>';
+	if (lots_geojson.length > 0) {
+		document.getElementById('pd').innerHTML = '<p>'+'BBL: ' +lots_geojson[0].properties.BBL +'</p>' + '<p>'+'Borough: ' +lots_geojson[0].properties.Boro_1 +'</p>' + '<p>'+'Block: ' +lots_geojson[0].properties.Block_1 + '<p>'+'Lot: ' +lots_geojson[0].properties.Lot_1 +'</p>' +'</p>' +'<p>'+'Address: ' +lots_geojson[0].properties.Address + '<p>'+'Owner: ' +lots_geojson[0].properties.OwnerName +'</p>' +'</p>' + '<p>'+'Number of Buildings: ' +lots_geojson[0].properties.NumBldgs + '</p>'
+		+ '<p>'+'Gross Square Footage: ' +lots_geojson[0].properties.GrossSquar + '</p>'+ '<p>'+'Building Class: ' +lots_geojson[0].properties.BC + '</p>'+ '<p>'+'Tax Class: ' +lots_geojson[0].properties.TaxClass + '</p>';
+	  } else {
+		document.getElementById('pd').innerHTML = '<p>Click on a lot for details...</p>';
+		map.setFeatureState({source: 'bldgSource2', id: clickStateId}, { click: false});
   }
 });
 
@@ -222,11 +207,6 @@ map.on('click', function(e) {
 // Change the cursor to a pointer when the mouse is over the lots layer.
 map.on('mouseenter', 'LL97_Lots', function () {
 map.getCanvas().style.cursor = 'pointer';
-});
- 
-// Change it back to a pointer when it leaves.
-map.on('mouseleave', 'LL97_Lots', function () {
-map.getCanvas().style.cursor = '';
 });
 
 // Change the cursor to a pointer when the mouse is over the lots geojson layer.
