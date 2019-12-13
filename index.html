@@ -4,124 +4,205 @@
     <meta charset='utf-8' />
     <title>Local Law 97</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css' rel='stylesheet' />
 	<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.css' type='text/css' />
 
+	<link rel="icon" type="image/png"  href="images/logo.png">	
+	<!-- bootstrap -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<!--   FONT AWESOME  -->
+	<link type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet">
+	<link type="text/css" href="ll97.css" rel="stylesheet">
 
     <style>
-        body { margin:0; padding:0; }
-        #map { position:absolute; top:0; bottom:0; width:100%; }
-		
-		h2,
-		h3 {
-		  margin: 10px;
-		  font-size: 1em;
-		}
 
-		h3 {
-		  font-size: 1em;
-		}
-		h4 {
-			font-size: 1.5em;
-			margin: 10px;
-		}
-		p {
-		  font-size: 0.85em;
-		  margin: 10px;
-		  text-align: left;
-		}
-		.map-overlay {
-		  position: absolute;
-		  bottom: 0;
-		  right: 0;
-		  background: rgba(255, 255, 255, 0.8);
-		  margin-right: 20px;
-		  font-family: Arial, sans-serif;
-		  overflow: auto;
-		  border-radius: 3px;
-		}
-
-		.description-overlay {
-		  position: absolute;
-		  bottom: 0;
-		  left: 0;
-		  background: rgba(255, 255, 255);
-		  margin-left: 20px;
-		  font-family: Arial, sans-serif;
-		  overflow: auto;
-		  border-radius: 3px;
-		  border: 2px solid black;
-		}
-		#features {
-		  top: 0;
-		  height: 300px;
-		  margin-top: 20px;
-		  width: 300px;
-		}
-		#desc-features {
-		  top: 0;
-		  height: 720px;
-		  margin-top: 20px;
-		  width: 500px;
-		}
-
-		#legend {
-		  padding: 10px;
-		  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-		  line-height: 18px;
-		  height: 150px;
-		  margin-bottom: 40px;
-		  width: 100px;
-		}
-
-		.legend-key {
-		  display: inline-block;
-		  border-radius: 20%;
-		  width: 10px;
-		  height: 10px;
-		  margin-right: 5px;
-		}
-		.geocoder {
-			position:absolute;
-			z-index:1;
-			width:300px;			
-			top: 0;
-			right: 0;
-			margin-right: 20px;
-			margin-top: 330px;
-		}
-		.mapboxgl-ctrl-geocoder { 
-			min-width:100%; 
-		}
-
-</style>
+	</style>
 </head>
 <body>
-
-		<div id='map'></div>
-		<div id='geocoder' class='geocoder'></div>
-		<div class='map-overlay' id='features'><h2>LOCAL LAW 97 ELIGIBLE LOTS</h2><div id='pd'><p>Click on a lot for details...</p></div></div>
-
-
-		<div class='description-overlay' id='desc-features'><h4>LOCAL LAW 97</h4><div id='pd'><p><em>To amend the New York city charter and the administrative code of the city of New York, in
-			relation to the commitment to achieve certain reductions in greenhouse gas emissions by 2050.</em></p></div><br/><div><h2>COVERED BUILDING:</h2></div><div id='pd'><p>The term “covered building” means, as it appears in the records of the department of finance, (i) a building that exceeds 25,000 gross square feet or (ii) two or more
-			buildings on the same tax lot that together exceed 50,000 gross square feet (9290 m2), or (iii) two or more buildings held in the condominium form of ownership that are governed by the same board of managers and that together exceed 50,000 gross square feet (9290 m2).</p></div>
-			<br/><div><h2>EXCEPTIONS:</h2></div><div id='pd'><p>1. An industrial facility primarily used for the generation of electric power or steam.<br/><br/>
-			2. Real property, not more than three stories, consisting of a series of attached, detached or
-			semi-detached dwellings, for which ownership and the responsibility for maintenance of the
-			HVAC systems and hot water heating systems is held by each individual dwelling unit owner, and
-			with no HVAC system or hot water heating system in the series serving more than two dwelling
-			units, as certified by a registered design professional to the department.<br/><br/>
-			3. A city building.<br/><br/>
-			4. A housing development or building on land owned by the New York city housing authority.<br/><br/>
-			5. A rent regulated accommodation.<br/><br/>
-			6. The real estate owned by any religious corporation located in the city of New York as now
-			constituted, actually dedicated and used by such corporation exclusively as a place of public
-			worship.<br/><br/>
-			7. Real property owned by a housing development fund company organized pursuant to the
-			business corporation law and article eleven of the private housing finance law.
-			</p></div>
+		<header>
+			<div class="container-fluid " style="
+			
+			 background: linear-gradient(to right, #ED8F03, #FFB75E); 
+			padding: 10px auto;
+			/* background: linear-gradient(to bottom, rgba(0,40,120,1) 0%,rgba(0,102,204,1) 100%); */
+			border:#c8c8c8 solid 1px;"
+			
+			
+			>  
+				<div class="row dobHeading" style="height:100%;color:white;">
+						<div class="col-lg-12">
+							Sustainability Compliance Maps
+			<img class="img-fluid float-xl-right" src="images/dob_logo4.png" style="height:60px;width:60px;" ></img> 
+						</div>											
+				</div>
+			</div>
+		</header>
+		
+ 		<div class="container-fluid"> 
+			<div class="row" >
+					<div id='map' >
+					</div>
+			</div>
 		</div>
+
+
+
+
+<div class="overlayParent">
+
+				<div class='map-overlay'>
+						<h6 class="font-weight-bold">LOCAL LAW 97 ELIGIBLE LOTS</h6>
+						<div id='pd'>
+								<p>Click on a lot for details...</p>
+						</div>
+				</div>
+
+
+			<div id='geocoder' class='geocoder'>
+			</div>
+
+
+</div>
+
+		
+		<div class='desktopDescription-overlay d-none d-xl-block px-md-2'>
+			<div class="container-fluid infoHideShow">
+				<div class="row">
+					<div class="zcol-md-12"  >
+							<i class="fa fa-chevron-up fa-2x float-left" aria-hidden="true" title="Collapse"></i>
+							<span class="font-weight-bold h3">&ensp;&ensp;About Local Law 97</span>
+					</div>
+				</div>
+			</div>
+			<div class="infoContent">
+						<div id='pd'>
+							<p><em>To amend the New York city charter and the administrative code of the city of New York, in
+							relation to the commitment to achieve certain reductions in greenhouse gas emissions by 2050.</em>
+							</p>
+						</div>
+						<br/>
+						<div>
+							<h6 class="font-weight-bold">COVERED BUILDING:</h6>
+						</div>
+						<div id='pd'>
+								<p>The term “covered building” means, as it appears in the records of the department of finance, (i) a building that exceeds 25,000 gross square feet or (ii) two or more
+									buildings on the same tax lot that together exceed 50,000 gross square feet (9290 m2), or (iii) two or more buildings held in the condominium form of ownership that are governed by the same board of managers and that together exceed 50,000 gross square feet (9290 m2).
+								</p>
+						</div>
+						<br/>
+						<div>
+							<h6 class="font-weight-bold">EXCEPTIONS:</h6>
+						</div>
+						<div id='pd' >
+							<ol>
+								<li>An industrial facility primarily used for the generation of electric power or steam.</li>
+								<li>Real property, not more than three stories, consisting of a series of attached, detached or
+									semi-detached dwellings, for which ownership and the responsibility for maintenance of the
+									HVAC systems and hot water heating systems is held by each individual dwelling unit owner, and
+									with no HVAC system or hot water heating system in the series serving more than two dwelling
+									units, as certified by a registered design professional to the department.</li>
+								<li>A city building.</li>
+								<li>A housing development or building on land owned by the New York city housing authority.</li>
+								<li>A rent regulated accommodation.</li>
+								<li>The real estate owned by any religious corporation located in the city of New York as now
+									constituted, actually dedicated and used by such corporation exclusively as a place of public
+									worship.</li>
+								<li>Real property owned by a housing development fund company organized pursuant to the
+									business corporation law and article eleven of the private housing finance law.</li>								
+							</ul>
+						</div>			
+			</div>
+		</div>
+
+
+		<div class="mobileDescription-overlay d-xl-none">
+			<div class="container-fluid">
+				<div class="row">
+						<div class="col-md-12">
+								<i class="fa fa-1x fa-info-circle" aria-hidden="true" title="Info"></i><span> LL 97</span>
+						</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		
+		
+		
+		<div class="container-fluid mobileContent"  style="display:none;width:100%;background-color:#f0f0f0;border:1px solid grey;">
+			<div class="row d-xl-none">			
+							<div class="container-fluid infoHideShow">
+									<div class="row">
+										<div class="col-md-1"  >
+												<!-- <i class="fa fa-chevron-up fa-2x float-left" aria-hidden="true" title="Collapse"></i>   -->
+												<i class="fa fa-times-circle fa-1x" aria-hidden="true" title="Collapse" style="color:blue"></i>
+
+										</div>
+										
+										<div class="col-md-11"  >
+
+												<span class="font-weight-bold h3">About Local Law 97</span>
+										</div>										
+										
+										
+									</div>
+							</div>
+				<div class="infoContent">
+			
+			
+								<!-- 
+									<div class="row ">
+										<div class="col-xl-6">
+											<h5 title="Back to Map"><i class="fa fa-chevron-up" aria-hidden="true" title="Collapse"></i> LOCAL LAW 97</h5>
+										</div>
+									</div>
+								-->	
+									
+									
+									
+									
+						<div id='pd'>
+							<p><em>To amend the New York city charter and the administrative code of the city of New York, in
+							relation to the commitment to achieve certain reductions in greenhouse gas emissions by 2050.</em>
+							</p>
+						</div>						
+						<br/>
+						<div>
+							<h5>COVERED BUILDING:</h5>
+						</div>
+						<div id='pd'>
+								<p>The term “covered building” means, as it appears in the records of the department of finance, (i) a building that exceeds 25,000 gross square feet or (ii) two or more
+									buildings on the same tax lot that together exceed 50,000 gross square feet (9290 m2), or (iii) two or more buildings held in the condominium form of ownership that are governed by the same board of managers and that together exceed 50,000 gross square feet (9290 m2).
+								</p>
+						</div>
+						<br/>
+						<div>
+							<h5>EXCEPTIONS:</h5>
+						</div>
+						<div id='pd' >
+							<ol>
+								<li>An industrial facility primarily used for the generation of electric power or steam.</li>
+								<li>Real property, not more than three stories, consisting of a series of attached, detached or
+									semi-detached dwellings, for which ownership and the responsibility for maintenance of the
+									HVAC systems and hot water heating systems is held by each individual dwelling unit owner, and
+									with no HVAC system or hot water heating system in the series serving more than two dwelling
+									units, as certified by a registered design professional to the department.</li>
+								<li>A city building.</li>
+								<li>A housing development or building on land owned by the New York city housing authority.</li>
+								<li>A rent regulated accommodation.</li>
+								<li>The real estate owned by any religious corporation located in the city of New York as now
+									constituted, actually dedicated and used by such corporation exclusively as a place of public
+									worship.</li>
+								<li>Real property owned by a housing development fund company organized pursuant to the
+									business corporation law and article eleven of the private housing finance law.</li>								
+							</ul>
+						</div>			
+			</div>			
+			</div>
+		</div>
+
+
 
 
 
@@ -137,95 +218,10 @@
 <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
 <script src="https://unpkg.com/geojson-vt@3.2.0/geojson-vt.js"></script>
+<script src="ll97.js"></script>
 
 
 <script>
-mapboxgl.accessToken = 'pk.eyJ1IjoiYm1hbmNlbGwiLCJhIjoiY2oxZ24yd3E2MDAzdDJ3cG1jenB2dTl3cSJ9.38jhDPw4NnOpKK2mMmF_xQ';
-
-
-var map = new mapboxgl.Map({
-    container: 'map',
-    style: 'mapbox://styles/mapbox/dark-v10',
-    center: [-73.973136,40.731069],
-    zoom: 12
-});
-
-var clickStateId = null;
-
-map.on('load', function () {
-
-	map.addSource('bldgSource2', {
-		'type': 'geojson',
-		'data': 'data/LL97_MapPLUTO_excludingExemptions3_6_WGS.json',
-		'generateId': true
-	})
-
-	map.addLayer({
-		'id': 'bldg-layer2',
-		'source': 'bldgSource2',
-		'type': 'fill',
-		"paint": {
-			'fill-opacity': 0.2,
-			'fill-color': ["case",
-				["boolean", ["feature-state", "click"], false],
-				'#0df7ff',
-				'#fcf403'
-				]			
-		}	
-	})
-
-	map.on("click", "bldg-layer2", function(e) {
-		if (e.features.length > 0) {
-		console.log(e.features[0])
-			if (clickStateId) {
-				map.setFeatureState({source: 'bldgSource2', id: clickStateId}, { click: false});
-			}
-			clickStateId = e.features[0].id;
-			map.setFeatureState({source: 'bldgSource2', id: clickStateId}, { click: true});
-		}
-		console.log('clickStateId = ',clickStateId)
-	});
-	
-});
-
-
-map.on('click', function(e) {
-
-  var lots_geojson = map.queryRenderedFeatures(e.point, {
-    layers: ['bldg-layer2']
-  });
-	if (lots_geojson.length > 0) {
-		document.getElementById('pd').innerHTML = '<p>'+'BBL: ' +lots_geojson[0].properties.BBL +'</p>' + '<p>'+'Borough: ' +lots_geojson[0].properties.Boro_1 +'</p>' + '<p>'+'Block: ' +lots_geojson[0].properties.Block_1 + '<p>'+'Lot: ' +lots_geojson[0].properties.Lot_1 +'</p>' +'</p>' +'<p>'+'Address: ' +lots_geojson[0].properties.Address + '<p>'+'Owner: ' +lots_geojson[0].properties.OwnerName +'</p>' +'</p>' + '<p>'+'Number of Buildings: ' +lots_geojson[0].properties.NumBldgs + '</p>'
-		+ '<p>'+'Gross Square Footage: ' +lots_geojson[0].properties.GrossSquar + '</p>'+ '<p>'+'Building Class: ' +lots_geojson[0].properties.BC + '</p>'+ '<p>'+'Tax Class: ' +lots_geojson[0].properties.TaxClass + '</p>';
-	  } else {
-		document.getElementById('pd').innerHTML = '<p>Click on a lot for details...</p>';
-		map.setFeatureState({source: 'bldgSource2', id: clickStateId}, { click: false});
-  }
-});
-
-
-// Change the cursor to a pointer when the mouse is over the lots layer.
-map.on('mouseenter', 'LL97_Lots', function () {
-map.getCanvas().style.cursor = 'pointer';
-});
-
-// Change the cursor to a pointer when the mouse is over the lots geojson layer.
-map.on('mouseenter', 'bldg-layer2', function () {
-map.getCanvas().style.cursor = 'pointer';
-});
- 
-// Change it back to a pointer when it leaves.
-map.on('mouseleave', 'bldg-layer2', function () {
-map.getCanvas().style.cursor = '';
-});
-
-var geocoder = new MapboxGeocoder({
-accessToken: mapboxgl.accessToken,
-mapboxgl: mapboxgl
-});
- 
-document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
-
 
 </script>
 
