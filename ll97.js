@@ -25,7 +25,6 @@ hideshowDesktop.addEventListener("click", (e) => {
 	}	
 );
 
-
 showMobileInfo=document.querySelector(".mobileDescription-overlay .row");
 showMobileInfo.addEventListener("click", (e) => {	
 	document.querySelector(".mobileContent").style.display="block";
@@ -34,19 +33,24 @@ showMobileInfo.addEventListener("click", (e) => {
 		block: "start", 
 		inline: "start"
 	});
-	//document.querySelector(".map-overlay").style.display="none";
 });
 
+mapButtonDiv = document.querySelector(".mapButtonDiv");
+mapButtonDiv.addEventListener("click", (e) => {	
+if (e.target.nodeName=="SPAN") {
+	for (let i = 0, c = e.currentTarget.children; i < c.length; i++) {
+		if (e.target == c[i] ) {
+				c[i].classList.add("selectedLocalLaw");			
+		} else {
+				c[i].classList.remove("selectedLocalLaw");
+		}
+}}})
 
 hideMobileInfo=document.querySelector(".mobileContent .fa");
 hideMobileInfo.addEventListener("click", (e) => {
-	//document.querySelector(".map-overlay").style.display="block";	
 	document.querySelector(".mobileContent").style.display="none";
 	window.scrollTo(0,0);
 })
-
-
-	
 
 var map = new mapboxgl.Map({
     container: 'map',
@@ -138,5 +142,70 @@ var geocoder = new MapboxGeocoder({
 accessToken: mapboxgl.accessToken,
 mapboxgl: mapboxgl
 });
+
  
 document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
+/*
+map.setFilter(
+
+'airport',   //LAYERID
+
+ [    //FILTER is an array, null or undefined
+	'match',
+	
+	['get', 'abbrev'],
+	
+	filtered.map(function(feature) {
+	return feature.properties.abbrev;
+	}),
+	
+	true,
+	false
+]
+
+
+);
+
+
+
+
+var featureLayer = L.mapbox.featureLayer()
+  .loadURL('/map/getjson/')
+  .addTo(map)
+  // initially set the filter
+  .setFilter(showBlueIfChecked);
+
+$("input[type='checkbox']").click(function() {
+  // refilter items when people click the checkbox
+  featureLayer.setFilter(showBlueIfChecked);
+});
+
+function showBlueIfChecked(feature) {
+  if ($("#blue").prop("checked")) {
+    return (feature.properties["marker-color"] === "#3b5998");
+  } else {
+    return false;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*/
