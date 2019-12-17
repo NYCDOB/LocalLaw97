@@ -7,19 +7,17 @@ body {
 	overflow: auto;
 }
 .switchLocalLawShown{
-	border: 3px solid black;
 	border-radius:5px;
 	margin: 5px 10px;
 	padding: 5px;
+	
 }
 .switchLocalLawShown:hover{
- text-shadow: 1px 1px 2px black;	
- border: 3px solid white;
- color: white;
+ text-shadow: 1px 1px 1px grey;	
 }
 .selectedLocalLaw {	
- border: 3px solid white;	
- color: white
+ color: orange;
+ font-weight: bold;
 }
 #map { 
 	width:100%; 
