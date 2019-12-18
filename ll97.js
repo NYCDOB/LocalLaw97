@@ -1,5 +1,4 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoiYm1hbmNlbGwiLCJhIjoiY2oxZ24yd3E2MDAzdDJ3cG1jenB2dTl3cSJ9.38jhDPw4NnOpKK2mMmF_xQ';
-
 hideshowDesktop=document.querySelector(".infoHideShow [class*='fa']");
 hideshowDesktop.addEventListener("click", (e) => {
 			if (e.target.classList.contains("fa-chevron-up")	)  {
@@ -11,19 +10,9 @@ hideshowDesktop.addEventListener("click", (e) => {
 					document.querySelector(".infoContent").style.display="block";
 					document.querySelector(".desktopDescription-overlay").style.height="700px";					
 					e.target.classList.replace("fa-chevron-down","fa-chevron-up");					
-					document.querySelector("[class*='fa-chevron']").title="Collapse"	;									
+					document.querySelector("[class*='fa-chevron']").title="Collapse";
 			}
-			/*
-			e.target.animate( 
-						   [	
-								{ transform: 'translateY(0px)' }, 				
-								{ transform: 'rotate(90deg)'}
-							]		 ,
-							500
-					)
-			*/
-	}	
-);
+});
 
 showMobileInfo=document.querySelector(".mobileDescription-overlay .row");
 showMobileInfo.addEventListener("click", (e) => {	
@@ -37,20 +26,20 @@ showMobileInfo.addEventListener("click", (e) => {
 
 mapButtonDiv = document.querySelector(".mapButtonDiv");
 mapButtonDiv.addEventListener("click", (e) => {	
-if (e.target.nodeName=="SPAN") {
+if (e.target.nodeName=="SPAN"){
 	for (let i = 0, c = e.currentTarget.children; i < c.length; i++) {
 		if (e.target == c[i] ) {
-				c[i].classList.add("selectedLocalLaw");			
+				c[i].classList.add("selectedLocalLaw");
 		} else {
 				c[i].classList.remove("selectedLocalLaw");
 		}
-}}})
+}}});
 
 hideMobileInfo=document.querySelector(".mobileContent .fa");
 hideMobileInfo.addEventListener("click", (e) => {
 	document.querySelector(".mobileContent").style.display="none";
 	window.scrollTo(0,0);
-})
+});
 
 var map = new mapboxgl.Map({
     container: 'map',
@@ -58,51 +47,67 @@ var map = new mapboxgl.Map({
     center: [-73.973136,40.731069],
     zoom: 12
 });
-
 var clickStateId = null;
 
-map.on('load', function () {
-	map.addSource('bldgSource2', {
-		'type': 'geojson',
-		'data': 'data/LL97_MapPLUTO_excludingExemptions3_6_WGS.json',
-		'generateId': true
-	})
-
-	map.addLayer({
-		'id': 'bldg-layer2',
-		'source': 'bldgSource2',
-		'type': 'fill',
-		"paint": {
-			'fill-opacity': 0.2,
-			'fill-color': ["case",
-				["boolean", ["feature-state", "click"], false],
-				'#0df7ff',
-				'#fcf403'
-				]			
-		}	
-	})
-	map.on("click", "bldg-layer2", function(e) {
-		if (e.features.length > 0) {
-		console.log(e.features[0])
-			if (clickStateId) {
-				map.setFeatureState({source: 'bldgSource2', id: clickStateId}, { click: false});
-			}
-			clickStateId = e.features[0].id;
-			map.setFeatureState({source: 'bldgSource2', id: clickStateId}, { click: true});
+var mypromise=new Promise(  (resolve,reject) => {
+	$.get('data/bbldata.csv', function (bbldata) {	
+		let arrBBL=[];
+		arrBBL = bbldata.split('\n').map(function(item) {
+			return parseInt(item);
+		});
+		(isNaN(arrBBL[0])) ? arrBBL.shift():true;  
+		if (arrBBL.length > 0) {
+			resolve(arrBBL);
+		} else {
+			reject("there is NO data in the bbl");
 		}
-		console.log('clickStateId = ',clickStateId)
-	});
+	})	
+});  //end of promise definition
 	
-});
-
-
+	
+mypromise
+	.then((filterArray) => {//when bbl lookup data exists
+				map.on('load', function () {
+					map.addSource('bldgSource2', {
+						'type': 'geojson',
+						'data': 'data/LL97_MapPLUTO_excludingExemptions3_6_WGS.json',
+						'generateId': true
+					})
+					// myarray=["Manhattan","Queens"];	var filterBBL = ['match', ['get', 'Boro_1'],   myarray,true,false];	
+					var filterBBL = ['match',['get', 'BBL'],filterArray,true,false];	
+					map.addLayer({
+						'id': 'bldg-layer2',
+						'source': 'bldgSource2',
+						'type': 'fill',
+						"paint": {
+							'fill-opacity': 1,   //0.5,
+							'fill-color': ["case",
+								["boolean", ["feature-state", "click"], false],
+								'#0df7ff',   //'#0df7ff',  click color
+								'#EE82EE'				//'#EE82EE'   fill color
+								]
+						},
+						"filter": filterBBL
+					});
+					map.on("click", "bldg-layer2", function(e) {
+						if (e.features.length > 0) {
+							//console.log(e.features[0])
+							if (clickStateId) {
+								map.setFeatureState({source: 'bldgSource2', id: clickStateId}, { click: false});
+							}
+							clickStateId = e.features[0].id;
+							map.setFeatureState({source: 'bldgSource2', id: clickStateId}, { click: true});
+						}
+						console.log('clickStateId = ',clickStateId);
+					});
+				});				
+	})
+	.catch ((error)=>{ console.log(error)});
 map.on('click', function(e) {
-
   var lots_geojson = map.queryRenderedFeatures(e.point, {
     layers: ['bldg-layer2']
   });
-	if (lots_geojson.length > 0) {
-		
+	if (lots_geojson.length > 0) {		
 		document.getElementById('pd').innerHTML = 
 		'<p>'+'BBL: ' +lots_geojson[0].properties.BBL +	'</p>' +
 		'<p>'+'Borough: ' +lots_geojson[0].properties.Boro_1 +'</p>' + 
@@ -120,7 +125,6 @@ map.on('click', function(e) {
   }
 });
 
-
 //Change the cursor to a pointer when the mouse is over the lots layer.
 map.on('mouseenter', 'LL97_Lots', function () {
 map.getCanvas().style.cursor = 'pointer';
@@ -136,76 +140,8 @@ map.on('mouseleave', 'bldg-layer2', function () {
 map.getCanvas().style.cursor = '';
 });
 
-
-
 var geocoder = new MapboxGeocoder({
 accessToken: mapboxgl.accessToken,
 mapboxgl: mapboxgl
 });
-
- 
 document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
-/*
-map.setFilter(
-
-'airport',   //LAYERID
-
- [    //FILTER is an array, null or undefined
-	'match',
-	
-	['get', 'abbrev'],
-	
-	filtered.map(function(feature) {
-	return feature.properties.abbrev;
-	}),
-	
-	true,
-	false
-]
-
-
-);
-
-
-
-
-var featureLayer = L.mapbox.featureLayer()
-  .loadURL('/map/getjson/')
-  .addTo(map)
-  // initially set the filter
-  .setFilter(showBlueIfChecked);
-
-$("input[type='checkbox']").click(function() {
-  // refilter items when people click the checkbox
-  featureLayer.setFilter(showBlueIfChecked);
-});
-
-function showBlueIfChecked(feature) {
-  if ($("#blue").prop("checked")) {
-    return (feature.properties["marker-color"] === "#3b5998");
-  } else {
-    return false;
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-*/

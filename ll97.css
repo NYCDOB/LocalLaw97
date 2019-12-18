@@ -39,6 +39,7 @@ body {
   width: 300px;
   background: rgba(255, 255, 255, 0.8);
   padding: 10px;
+  border: 1px solid dimgrey;
   border-radius: 3px;
 }
 .geocoder {
@@ -67,7 +68,7 @@ body {
   margin-left: 20px;
   overflow: auto;
   border-radius: 3px;
-  border: 2px solid black;
+  border: 1px solid black;
   
   top: 120px;
   max-height: 700px;
@@ -108,8 +109,14 @@ body {
 	#map {
 		height: 60vh;
 	}
+	.map-overlay {
+		border: 0px;
+	}
 	.overlayParent {
 		position: static;
+		
+    border: solid 2px dimgrey;
+
 	}
 	.geocoder {
 		position:absolute;
