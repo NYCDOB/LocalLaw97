@@ -80,7 +80,7 @@ mypromise
 						'source': 'bldgSource2',
 						'type': 'fill',
 						"paint": {
-							'fill-opacity': 1,   //0.5,
+							'fill-opacity': 0.5,
 							'fill-color': ["case",
 								["boolean", ["feature-state", "click"], false],
 								'#0df7ff',   //'#0df7ff',  click color
