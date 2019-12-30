@@ -1,0 +1,21 @@
+body {
+	margin:0; 
+	padding:0; 
+	height: 100%;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;	
+	box-sizing: border-box;
+	overflow: auto;
+}
+.switchLocalLawShown{
+	border-radius:5px;
+	margin: 5px 10px;
+	padding: 5px;
+	
+}
+.switchLocalLawShown:hover{
+	text-shadow: 1px 1px 1px grey;	
+}
+.selectedLL {	
+ color: orange;
+ font-weight: bold;
+}

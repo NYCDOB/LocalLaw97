@@ -1,24 +1,4 @@
-body {
-	margin:0; 
-	padding:0; 
-	height: 100%;
-	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;	
-	box-sizing: border-box;
-	overflow: auto;
-}
-.switchLocalLawShown{
-	border-radius:5px;
-	margin: 5px 10px;
-	padding: 5px;
-	
-}
-.switchLocalLawShown:hover{
- text-shadow: 1px 1px 1px grey;	
-}
-.selectedLocalLaw {	
- color: orange;
- font-weight: bold;
-}
+@import "ll97import.css"; 
 #map { 
 	width:100%; 
 	height: 86.5vh;
@@ -49,43 +29,37 @@ body {
 }
 .mapboxgl-ctrl-geocoder { 
 	min-width:100%; 
-					border-radius: 3px;
-		border: 2px solid black;
+	border-radius: 3px;
+	border: 2px solid black;
 }		
 
 .map-overlay p {
-  font-size: 0.85em;
-  margin: 10px;
-  text-align: left;
+	font-size: 0.85em;
+	margin: 10px;
+	text-align: left;
 }
 
 
-
-.desktopDescription-overlay {
-  position: absolute;
-  left: 0;
-  background: rgba(255, 255, 255);
-  margin-left: 20px;
-  overflow: auto;
-  border-radius: 3px;
-  border: 1px solid black;
-  
-  top: 120px;
-  max-height: 700px;
-  margin-top: 20px;
-  width: 500px;		  
-  
+.desktopDescFloat {
+	position: absolute;
+	left: 0;
+	background: rgba(255, 255, 255);
+	margin-left: 20px;
+	overflow: auto;
+	border-radius: 3px;
+	border: 1px solid black;
+	top: 120px;
+	max-height: 700px;
+	margin-top: 20px;
+	width: 500px;		    
 }
-
-.mobileDescription-overlay {
-		position: absolute;
-
-		top: 20%;
-		max-width: 150px;
-		background: rgba(255, 255, 255);
-		margin-left: 20px;
-		border-radius: 3px;
-		border: 2px solid black;
+.mobileDescFloat {
+	position: absolute;
+	top: 20%;
+	background: rgba(255, 255, 255);
+	margin-left: 20px;
+	border-radius: 3px;
+	border: 2px solid black;
 }
 .dobHeading {
 	font-weight:bolder;
@@ -95,7 +69,7 @@ body {
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
-.infoContent {
+.infoContent, .infoContentR {
 	margin: 10px 10px;
 }
 @media only screen and (max-width: 1199px) {			
@@ -114,9 +88,7 @@ body {
 	}
 	.overlayParent {
 		position: static;
-		
-    border: solid 2px dimgrey;
-
+		border: solid 2px dimgrey;
 	}
 	.geocoder {
 		position:absolute;
@@ -124,5 +96,5 @@ body {
 		top:25%;
 		margin-left: 20px;
 		border-radius: 3px;
-	}			
+	}
 }

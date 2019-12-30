@@ -2,214 +2,90 @@
 <html>
 <head>
     <meta charset='utf-8' />
-    <title>Local Law 97</title>
+    <title>NYC DOB Local Law Map</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css' rel='stylesheet' />
 	<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.css' type='text/css' />
 	<link rel="icon" type="image/png"  href="images/logo.png">	
-	<!-- bootstrap -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-	<!--   FONT AWESOME  -->
 	<link type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet">
 	<link type="text/css" href="ll97.css" rel="stylesheet">
 </head>
 <body>
 		<header>
-			<div class="container-fluid " style="background: linear-gradient(to right, #ED8F03, #FFB75E); padding: 10px auto;/* background: linear-gradient(to bottom, rgba(0,40,120,1) 0%,rgba(0,102,204,1) 100%); */border:#c8c8c8 solid 1px;">  
+			<div class="container-fluid " style="background: linear-gradient(to right, #ED8F03, #FFB75E); padding: 20px auto;/* background: linear-gradient(to bottom, rgba(0,40,120,1) 0%,rgba(0,102,204,1) 100%); */border:#c8c8c8 solid 1px;">  
 				<div class="row dobHeading" style="color:white;">
-						<div class="col-xl-12">
-							Sustainability Compliance Maps
-							<a href="https://a810-dobnow.nyc.gov/publish/#!/" target="_blank"><img class="img-fluid float-xl-right" src="images/dob_logo4.png" style="height:60px;width:60px;" ></a>
-						</div>											
+					<div class="col-xl-12">Sustainability Compliance Maps<a href="https://a810-dobnow.nyc.gov/publish/#!/" target="_blank"><img class="img-fluid float-xl-right" src="images/dob_logo4.png" style="height:60px;width:60px;" ></a></div>											
 				</div>
-
-
 				<div class="row" class="dobHeading" style="padding: 15px 0px;background-color:rgb(254, 254, 254);">
-					<div class="col-xl-6 mapButtonDiv" style="margin:5px 0 5px;font-weight: bold;">
-							<span class="switchLocalLawShown ll97 selectedLocalLaw text-nowrap" >Local Law 97</span>
-							<span class="switchLocalLawShown ll97 text-nowrap">Local Law 92</span>
-							<span class="switchLocalLawShown ll97 text-nowrap">Local Law 94</span>
-					</div>
+				<div class="col-xl-6 mapButtonDiv" style="margin:5px 0 5px;font-weight: bold;">
+				<span class="switchLocalLawShown selectedLL text-nowrap" data-ll="97" >Local Law 97</span>
+				<span class="switchLocalLawShown text-nowrap" data-ll="92" >Local Law 92</span>
+				<span class="switchLocalLawShown text-nowrap" data-ll="94" >Local Law 94</span>
 				</div>
-				
-				
+				</div>
 			</div>
 		</header>
-
  		<div class="container-fluid"> 
 			<div class="row" >
-					<div id='map' >
+					<div id='map'>
 					</div>
 			</div>
 		</div>
-
 		<div class="overlayParent">
-
 				<div class='map-overlay'>
-						<h6 class="font-weight-bold">LOCAL LAW 97 ELIGIBLE LOTS</h6>
-						<div id='pd'>
+						<h6 class="font-weight-bold aboutHead">LOCAL LAW <span class="llnumspan"></span> ELIGIBLE LOTS</h6>
+						<div id='lotdetails'>
 								<p>Click on a lot for details...</p>
 						</div>
 				</div>
-
-
 			<div id='geocoder' class='geocoder'>
 			</div>
-
-
 		</div>
-
-		
-		<div class='desktopDescription-overlay d-none d-xl-block px-md-2'>
-			<div class="container-fluid infoHideShow">
-				<div class="row">
-					
-							<div class=""  >
-									<i class="fa fa-chevron-up fa-2x float-left" aria-hidden="true" title="Collapse"></i>
-									<span class="font-weight-bold h3">&ensp;&ensp;&ensp;About Local Law 97</span>
-							</div>
-					
-					
-					<!--
-					<div class="col-xl-1"><i class="fa fa-chevron-up fa-2x float-left" aria-hidden="true" title="Collapse"></i>
-					</div>
-					<div class="col-xl-11"><span class="font-weight-bold h3 mx-auto">About Local Law 97</span>
-					</div>					
-					-->
-					
-				</div>
-			</div>
-			<div class="infoContent">
-						<div id='pd'>
-							<p class="lead"><em>To amend the New York city charter and the administrative code of the city of New York, in
-							relation to the commitment to achieve certain reductions in greenhouse gas emissions by 2050.</em>
-							</p>
+			<div class="row desktopDescFloat d-none d-xl-block">
+					<i class="fa fa-chevron-up fa-2x float-left infoHideShow" aria-hidden="true" title="Collapse"></i>
+					<span class="font-weight-bold h3 aboutHead">&ensp;&ensp;&ensp;About Local Law <span class="llnumspan"></span></span>
+					<div class="infoContent">					
+						<div class="shell" style="display:none;">
+						<div>
+							<p class="lead"><em></em></p>
 						</div>
 						<br/>
 						<div>
 							<h6 class="font-weight-bold">COVERED BUILDING:</h6>
 						</div>
-						<div id='pd'>
-								<p>The term “covered building” means, as it appears in the records of the department of finance, (i) a building that exceeds 25,000 gross square feet or (ii) two or more
-									buildings on the same tax lot that together exceed 50,000 gross square feet (9290 m2), or (iii) two or more buildings held in the condominium form of ownership that are governed by the same board of managers and that together exceed 50,000 gross square feet (9290 m2).
-								</p>
+						<div id='who'><p></p>
 						</div>
 						<br/>
 						<div>
 							<h6 class="font-weight-bold">EXCEPTIONS:</h6>
 						</div>
-						<div id='pd' >
+						<div id='exceptions' >
 							<ol>
-								<li>An industrial facility primarily used for the generation of electric power or steam.</li>
-								<li>Real property, not more than three stories, consisting of a series of attached, detached or
-									semi-detached dwellings, for which ownership and the responsibility for maintenance of the
-									HVAC systems and hot water heating systems is held by each individual dwelling unit owner, and
-									with no HVAC system or hot water heating system in the series serving more than two dwelling
-									units, as certified by a registered design professional to the department.</li>
-								<li>A city building.</li>
-								<li>A housing development or building on land owned by the New York city housing authority.</li>
-								<li>A rent regulated accommodation.</li>
-								<li>The real estate owned by any religious corporation located in the city of New York as now
-									constituted, actually dedicated and used by such corporation exclusively as a place of public
-									worship.</li>
-								<li>Real property owned by a housing development fund company organized pursuant to the
-									business corporation law and article eleven of the private housing finance law.</li>								
 							</ul>
 						</div>			
-			</div>
-		</div>
-
-
-		<div class="mobileDescription-overlay d-xl-none">
-			<div class="container-fluid">
-				<div class="row">
-						<div class="col-md-12">
-								<i class="fa fa-1x fa-info-circle" aria-hidden="true" title="Info"></i><span> Local Law 97</span>
 						</div>
+						
+					</div>
+			</div>
+			<div class="row mobileDescFloat d-xl-none px-2">  	
+					<i class="fa fa-1x fa-info-circle p-1 infoHideShow aboutHead" aria-hidden="true" title="Info"></i><span> Local Law  <span class="llnumspan"></span></span>
+			</div>  					
+			<div class="row d-xl-none p-3 mobileDescHeader" style="display:none">
+				<div class="col-md-1">
+						<i class="fa fa-times-circle fa-2x px-2" aria-hidden="true" title="Collapse" style="color:blue"></i>
 				</div>
-			</div>
-		</div>
-		
-		
-		
-		
-		
-		<div class="container-fluid mobileContent"  style="display:none;width:100%;background-color:#f0f0f0;border:1px solid grey;">
-			<div class="row d-xl-none">			
-							<div class="container-fluid infoHideShow">
-									<div class="row">
-										<div class="col-md-1"  >
-												<!-- <i class="fa fa-chevron-up fa-2x float-left" aria-hidden="true" title="Collapse"></i>   -->
-												<i class="fa fa-times-circle fa-1x" aria-hidden="true" title="Collapse" style="color:blue"></i>
-										</div>
-										<div class="col-md-11"  >
-												<span class="font-weight-bold h3">About Local Law 97</span>
-										</div>																				
-									</div>
-							</div>
-				<div class="infoContent">
-			
-			
-								<!-- 
-									<div class="row ">
-										<div class="col-xl-6">
-											<h5 title="Back to Map"><i class="fa fa-chevron-up" aria-hidden="true" title="Collapse"></i> LOCAL LAW 97</h5>
-										</div>
-									</div>
-								-->	
-									
-									
-									
-									
-						<div id='pd'>
-							<p><em>To amend the New York city charter and the administrative code of the city of New York, in
-							relation to the commitment to achieve certain reductions in greenhouse gas emissions by 2050.</em>
-							</p>
-						</div>						
-						<br/>
-						<div>
-							<h5>COVERED BUILDING:</h5>
-						</div>
-						<div id='pd'>
-								<p>The term “covered building” means, as it appears in the records of the department of finance, (i) a building that exceeds 25,000 gross square feet or (ii) two or more
-									buildings on the same tax lot that together exceed 50,000 gross square feet (9290 m2), or (iii) two or more buildings held in the condominium form of ownership that are governed by the same board of managers and that together exceed 50,000 gross square feet (9290 m2).
-								</p>
-						</div>
-						<br/>
-						<div>
-							<h5>EXCEPTIONS:</h5>
-						</div>
-						<div id='pd' >
-							<ol>
-								<li>An industrial facility primarily used for the generation of electric power or steam.</li>
-								<li>Real property, not more than three stories, consisting of a series of attached, detached or
-									semi-detached dwellings, for which ownership and the responsibility for maintenance of the
-									HVAC systems and hot water heating systems is held by each individual dwelling unit owner, and
-									with no HVAC system or hot water heating system in the series serving more than two dwelling
-									units, as certified by a registered design professional to the department.</li>
-								<li>A city building.</li>
-								<li>A housing development or building on land owned by the New York city housing authority.</li>
-								<li>A rent regulated accommodation.</li>
-								<li>The real estate owned by any religious corporation located in the city of New York as now
-									constituted, actually dedicated and used by such corporation exclusively as a place of public
-									worship.</li>
-								<li>Real property owned by a housing development fund company organized pursuant to the
-									business corporation law and article eleven of the private housing finance law.</li>								
-							</ul>
-						</div>			
-			</div>			
-			</div>
-		</div>
+				<div class="zzcol-md-11 mx-auto"  >
+						<span class="font-weight-bold h3 aboutHead">About Local Law <span class="llnumspan"></span></span>
+				</div>																				
+			</div>		
 <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.js'></script>
 <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.min.js'></script>
-
 <!-- Promise polyfill script required to use Mapbox GL Geocoder in IE 11 -->
 <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
 <script src="https://unpkg.com/geojson-vt@3.2.0/geojson-vt.js"></script>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
 <script src="ll97.js"></script>
 <script>
 </script>
