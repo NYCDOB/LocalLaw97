@@ -11,12 +11,10 @@ body {
 	margin: 5px 10px;
 	padding: 5px;
 	cursor: pointer;
-	
 }
 .switchLocalLawShown:hover{
-	text-shadow: 1px 1px 1px grey;	
+	color: #ED8F03;	
 }
 .selectedLL {	
  color: orange;
- font-weight: bold;
 }
