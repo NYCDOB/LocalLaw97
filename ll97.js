@@ -137,16 +137,23 @@ let vLocalLaw = new Promise( function(resolve,reject) {
 									cc.classList.replace("shell","ll"+locallaws[x].name);
 								cc.setAttribute("dispname",locallaws[x].dispname);
 									document.querySelectorAll(".llnumspan").forEach( 
-										(item) =>{item.innerHTML = locallaws[x].dispname;})	//name						
+										(item) =>{item.innerHTML = locallaws[x].dispname;})	
 									document.querySelector(".infoContent").appendChild(cc)
 									document.querySelector(".ll" + locallaws[x].name + " .lead em").innerHTML=locallaws[x].desc ;
-									document.querySelector(".ll" + locallaws[x].name + " #who p").innerHTML=locallaws[x].who;
+									for (let ctr=0,t=locallaws[x].who.length;ctr<t;ctr++) {
+										let el=document.createElement("li");
+										let elcontent=document.createTextNode(locallaws[x].who[ctr].description);
+										el.appendChild(elcontent);
+										document.querySelector(".ll" + locallaws[x].name + " #who ol").appendChild(el);
+									}
 									for (let ctr=0,t=locallaws[x].exceptions.length;ctr<t;ctr++) {
 										let el=document.createElement("li");
 										let elcontent=document.createTextNode(locallaws[x].exceptions[ctr].description);
 										el.appendChild(elcontent);
 										document.querySelector(".ll" + locallaws[x].name + " #exceptions ol").appendChild(el);
 									}
+
+
 									if ( document.querySelector(".selectedLL").getAttribute("data-ll") == locallaws[x].name  )  {
 										document.querySelector(".ll" + locallaws[x].name).style.display="block";
 									}
