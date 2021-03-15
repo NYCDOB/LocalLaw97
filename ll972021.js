@@ -28,9 +28,7 @@ showMobileInfo=document.querySelector(".mobileDescFloat");
 mapButtonDiv = document.querySelector(".mapButtonDiv");
 mapButtonDiv.addEventListener("click", (e) => {	
 if (e.target.nodeName=="SPAN"){	
-	//document.querySelector('#lotdetails').innerHTML = "";
-	
-			document.getElementById('lotdetails').innerHTML = '<p>Click on a lot for details...</p>';
+	document.getElementById('lotdetails').innerHTML = '<p>Click on a lot for details...</p>';
 	document.querySelector(".mobileDescHeader").style.display="none";	
 	for (let i = 0, c = e.currentTarget.children; i < c.length; i++) {
 		let vLLAttrib= c[i].attributes["data-ll"].value  ;		
@@ -114,8 +112,8 @@ vAllBBL
 					
 					map.addSource('_97Source', {
 						'type': 'geojson',
-						'data': 'data/LL97_BBLs.json',  //https://github.com/NYCDOB/LocalLaw97/blob/gh-pages/data/LL97_BBLs_031221.json, 
-						'generateId': true        //https://raw.githubusercontent.com/NYCDOB/LocalLaw97/gh-pages/data/LL97_BBLs_031221.json
+						'data': 'data/LL97_BBLs.json', 
+						'generateId': true 
 					})
 
 					map.addSource('_33Source', {
@@ -149,24 +147,6 @@ vAllBBL
 								]
 						}
 					});
-/*					
-					map.addLayer({
-						'id': '33',
-						'source': 'bldgSource1',
-						'type': 'fill',
-						"paint": {
-							'fill-opacity': 0.2,
-							'fill-color': ["case",
-								["boolean", ["feature-state", "click"], false],
-								'#0df7ff',
-								'#fcf403'
-								]
-						},
-						"filter": filterLayer33
-					});			
-*/					
-					//map.on("click", "97", function(e) { if (e.features.length > 0) { if (clickStateId) { map.setFeatureState({source: 'bldgSource1', id: clickStateId}, { click: false}); } clickStateId = e.features[0].id; map.setFeatureState({source: 'bldgSource1', id: clickStateId}, { click: true}); } console.log('clickStateId = ',clickStateId); });
-//new
 map.on("click", "97", function(e) { 
 	if (e.features.length > 0) { 
 		if (clickStateId) { 
@@ -175,18 +155,15 @@ map.on("click", "97", function(e) {
 		clickStateId = e.features[0].id;
 		map.setFeatureState({source: '_97Source', id: clickStateId}, { click: true});
 	} 
-	//console.log('clickStateId = ',clickStateId);
 });
 
 
 map.on("click", "33", function(e) { 
 	if (e.features.length > 0) { 
 		if (clickStateId) { 
-			//map.setFeatureState({source: 'bldgSource1', id: clickStateId}, { click: false});
 			map.setFeatureState({source: '_33Source', id: clickStateId}, { click: false});
 		} 
 		clickStateId = e.features[0].id; 
-		//map.setFeatureState({source: 'bldgSource1', id: clickStateId}, { click: true});
 		map.setFeatureState({source: '_33Source', id: clickStateId}, { click: true});
 	} 
 });
