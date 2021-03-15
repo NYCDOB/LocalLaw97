@@ -189,7 +189,7 @@ map.on('click', function(e) {
 	if (lots_geojson.length > 0) {	
 		document.getElementById('lotdetails').innerHTML = 
 		'<p>'+'BBL: ' +lots_geojson[0].properties.BBL_MapPLU +	'</p>' +
-		'<p>'+'Borough: ' +lots_geojson[0].properties.Boro+'</p>' + 
+		'<p>'+'Borough: ' +lots_geojson[0].properties.BoroughNam+'</p>' + 
 		'<p>'+'Block: ' +lots_geojson[0].properties.Block_1 + 
 		'<p>'+'Lot: ' +lots_geojson[0].properties.Lot_1 +'</p>' +'</p>' +
 		'<p>'+'Address: ' + lots_geojson[0].properties.Street_Num + " " +lots_geojson[0].properties.Street_Nam + '</p>' +
