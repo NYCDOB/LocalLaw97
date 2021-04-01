@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title>NYC DOB Local Law Map</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css' rel='stylesheet' />
+	<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.css' type='text/css' />
+	<link rel="icon" type="image/png"  href="images/logo.png">	
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet">
+	<link type="text/css" href="ll97.css" rel="stylesheet">
+	<style>
+.terms * {
+	color: black;
+	text-decoration: none;
+	font-weight: bold;
+}
+.myLegend {
+	display:none;
+	font-size:.75em;
+	color:white;
+	font-weight:bold;
+	margin-top: 	75px;
+	background-color: rgba(255, 255, 255, 0.9);
+}
+.showlegend {
+	font-size: .80em;
+	margin-left:10px;
+	cursor:pointer;
+}
+.myLegend div {
+margin-left:2px; 
+padding-left: 5px ; 
+border: 2px solid white;
+}
+</style>
+</head>
+<body>
+		<header>
+			<div class="container-fluid " style="background: linear-gradient(to right, #ED8F03, #FFB75E); padding: 20px auto;/* background: linear-gradient(to bottom, rgba(0,40,120,1) 0%,rgba(0,102,204,1) 100%); */border:#c8c8c8 solid 1px;">  
+				<div class="row dobHeading" style="color:white;">
+					<div class="col-xl-12">Sustainability Compliance Maps<a href="https://a810-dobnow.nyc.gov/publish/#!/" target="_blank"><img class="img-fluid float-xl-right" src="images/dob_logo4.png" style="height:60px;width:60px;" ></a></div>											
+				</div>
+				<div class="row" class="dobHeading" style="padding: 15px 0px;background-color:rgb(254, 254, 254);">
+					<div class="col-1 col-sm-10 zzcol-md-8 sscol-xl-6 mapButtonDiv" style="margin:5px 0 5px;font-weight: bold;">
+						<span class="switchLocalLawShown selectedLL text-nowrap" data-dispname="97" data-ll="97">Local Law 97</span>
+						<!-- <span class="switchLocalLawShown text-nowrap" data-dispname="92/94" data-ll="9294">Local Law 92/94</span>  -->
+						<span class="switchLocalLawShown text-nowrap" data-dispname="33" data-ll="33">Local Law 33/84</span>
+					</div>					
+					<div class="col-1 col-sm-2 zzfloat-right">
+						<span class="float-right small terms"><a href="https://www1.nyc.gov/home/terms-of-use.page" target="_blank">Terms of Use</a></span>
+					</div>
+
+				</div>
+			</div>
+		</header>
+ 		<div class="container-fluid"> 
+			<div class="row" >
+					<div id='map'>					
+					<div class=" mobileDescFloat d-xl-none px-2" style="/*z-index:2; font-size: large;*/">  	
+							<i class="fa fa-1x fa-info-circle p-1 infoHideShow aboutHead" aria-hidden="true" title="Info"></i><span> Local Law  <span class="llnumspan"></span></span>
+					</div>  									
+					</div>
+			</div>
+		</div>
+		<div class="overlayParent">
+			<div class='map-overlay'>
+					<h6 class="font-weight-bold aboutHead">LOCAL LAW <span class="llnumspan"></span> ELIGIBLE LOTS</h6>
+					<div id='lotdetails'> <p>Click on a lot for details...</p>
+					</div>
+			</div>
+			<div id='geocoder' class='geocoder xlgeocoder'>
+			</div>
+			<div class='myLegend geocoder _xlgeocoder d-none'>
+						<div style="color:black;display:flex;justify-content:center;zfont-size:1.2em">
+							<b>ENERGY EFFICIENCY SCORE </b>
+							<!-- <i title="Hide" class="fa fa-chevron-up legendicon"></i>  -->
+						</div>
+						<div style="background-color: #4367AD;">
+								A: ENERGY STAR RATING >= 85
+						</div>						
+						<div style="background-color: #93C5DE; ">
+								B: ENERGY STAR RATING >= 70 AND &#60; 85
+						</div>
+						<div style="background-color: #F6851F;">
+								C: ENERGY STAR RATING >= 55 AND &#60; 70
+						</div>
+						<div style="background-color:#C31E28;">
+								D: ENERGY STAR RATING &#60; 55
+						</div>
+						<div style="background-color: #E6E600;color:black;">
+								<!-- F: BUILDINGS THAT HAVE NOT SUBMITTED REQUIRED BENCHMARKING INFORMATION  -->
+								F: REQUIRED BENCHMARKING INFORMATION NOT SUBMITTED
+						</div>
+			</div>			
+		</div>
+			<div class="row desktopDescFloat d-none d-xl-block">
+					<i class="fa fa-chevron-up fa-2x float-left infoHideShow" aria-hidden="true" title="Collapse"></i>
+					<span class="font-weight-bold h3 aboutHead">&ensp;&ensp;&ensp;About Local Law <span class="llnumspan"></span></span>
+					<div class="infoContent">					
+						<div class="shell" style="display:none;">
+						<div>
+							<p class="lead"><em></em></p>
+						</div>
+						<br/>
+						<div>
+							<h6 class="font-weight-bold">COVERED BUILDING:</h6>
+						</div>
+						<div id='who'>
+						<!--   <p></p>   -->
+							<ol>
+							</ul>
+						
+						</div>
+						<br/>
+						<div>
+							<h6 class="font-weight-bold">EXCEPTIONS:</h6>
+						</div>
+						<div id='exceptions' >
+							<ol>
+							</ul>
+						</div>			
+						</div>
+						
+					</div>
+			</div>			
+			<div class="row d-xl-none p-3 mobileDescHeader" style="display:none;background-color: lightyellow">
+				<div class="col-md-1">
+						<i class="fa fa-times-circle fa-2x px-2" aria-hidden="true" title="Collapse" style="color:blue"></i>
+				</div>
+				<div class="col-md-11 mx-auto"  >
+						<span class="font-weight-bold h1 aboutHead">About Local Law <span class="llnumspan"></span></span>
+				</div>																				
+			</div>	
+<div id='legend' style='display:none;'>
+  <strong>The Title or Explanation of your Map</strong>
+  <nav class='legend clearfix'>
+    <span style='background:#F1EEF6;'></span>
+    <span style='background:#BDC9E1;'></span>
+    <span style='background:#74A9CF;'></span>
+    <span style='background:#2B8CBE;'></span>
+    <span style='background:#045A8D;'></span>
+    <label>0 - 20%</label>
+    <label>40%</label>
+    <label>60%</label>
+    <label>80%</label>
+    <label>100%</label>
+    <small>Source: <a href="#link to source">Name of source</a></small>
+</div>			
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.js'></script>
+<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.min.js'></script>
+<!-- Promise polyfill script required to use Mapbox GL Geocoder in IE 11 -->
+<script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
+<script src="https://unpkg.com/geojson-vt@3.2.0/geojson-vt.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="ll970401.js"></script>
+<script>
+</script>
+</body>
+</html>
