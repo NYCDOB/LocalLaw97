@@ -111,12 +111,12 @@ vAllBBL
 				map.on('load', function () {
 					map.addSource('_97Source', {
 						'type': 'geojson',
-						'data': 'data/LL97_BBLs.json', 
+						'data': 'data/LL97_ExceptionsRemoved.json', 
 						'generateId': true 
 					})
 					map.addSource('_33Source', {
 						'type': 'geojson',
-						'data': 'data/LL84.json',
+						'data': 'data/LL84_LetterGrade.json',
 						'generateId': true
 					});
 					map.addLayer({
