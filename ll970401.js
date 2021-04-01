@@ -229,7 +229,7 @@ map.on('click', function(e) {
 		'<p>'+'Gross Square Footage: ' +lots_geojson[0].properties.DOF_Gross_ + '</p>' + 
 		'<p>'+'Building Class: ' +lots_geojson[0].properties.Building_C + '</p>' + 
 		'<p>'+'Tax Class: ' +lots_geojson[0].properties.Tax_Class + '</p>' + 		
-		((lots_geojson[0].properties.LetterGrad   ) ? '<p>'+'Letter Grade: ' +lots_geojson[0].properties.LetterGrad + "<span class='showlegend' onclick='showme()'>Show/Hide Legend</span>": "");
+		((lots_geojson[0].properties.LetterGrad   ) ? '<p>'+'Letter Grade: ' +lots_geojson[0].properties.LetterGrad : "");
 	  } else {
 		document.getElementById('lotdetails').innerHTML = '<p>Click on a lot for details...</p>';
 		map.setFeatureState({source: '_33Source', id: clickStateId}, { click: false});
