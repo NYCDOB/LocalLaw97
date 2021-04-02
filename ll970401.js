@@ -1,24 +1,22 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoiYm1hbmNlbGwiLCJhIjoiY2oxZ24yd3E2MDAzdDJ3cG1jenB2dTl3cSJ9.38jhDPw4NnOpKK2mMmF_xQ';
 hideshowDesktop=document.querySelector("[class*='fa-chevron']:not(.legendicon)");
 hideshowDesktop.addEventListener("click", (e) => {
-	if (e.target.classList.contains("fa-chevron-up")	)  {
-			e.target.classList.replace("fa-chevron-up","fa-chevron-down");				
-			document.querySelector(".desktopDescFloat").style.height="40px";
-			document.querySelector(".infoContent").style.display="none";
-			document.querySelector("[class*='fa-chevron']").title="Show"	;				
-	} else {
-			document.querySelector(".infoContent").style.display="block";
-			document.querySelector(".desktopDescFloat").style.height="700px";					
-			e.target.classList.replace("fa-chevron-down","fa-chevron-up");					
-			document.querySelector("[class*='fa-chevron']").title="Collapse";
-	}
+if (e.target.classList.contains("fa-chevron-up")	)  {
+	e.target.classList.replace("fa-chevron-up","fa-chevron-down");				
+	document.querySelector(".desktopDescFloat").style.height="40px";
+	document.querySelector(".infoContent").style.display="none";
+	document.querySelector("[class*='fa-chevron']").title="Show"	;				
+} else {
+	document.querySelector(".infoContent").style.display="block";
+	document.querySelector(".desktopDescFloat").style.height="700px";					
+	e.target.classList.replace("fa-chevron-down","fa-chevron-up");					
+	document.querySelector("[class*='fa-chevron']").title="Collapse";
+}
 });
-
 function showme() {
 	aaa=document.querySelector('.myLegend')
 	aaa.classList.toggle('d-xl-block');
 }
-
 showMobileInfo=document.querySelector(".mobileDescFloat");
 	showMobileInfo.addEventListener("click",(e) =>{
 	(document.querySelector(".infoContentR")) ? document.querySelector(".infoContentR").remove():true;
@@ -34,21 +32,23 @@ showMobileInfo=document.querySelector(".mobileDescFloat");
 mapButtonDiv = document.querySelector(".mapButtonDiv");
 mapButtonDiv.addEventListener("click", (e) => {	
 if (e.target.nodeName=="SPAN"){	
-	aaa=document.querySelector('.myLegend');
-	console.log(window.innerWidth)
-	console.log(screen.width)
 	if (e.target.getAttribute("data-dispname") == "33") {
-	aaa.classList.add("d-xl-block");
-	aaa.style.display="block";
+	document.querySelector('.myLegend').classList.add("d-xl-block","d-none");
+	document.querySelector('.myLegend').style.display="block";
+	document.querySelector(".floatLegend").style.display="block"
+	document.querySelector(".floatLegend").classList.add("d-xl-none");		
 	} else {
-	aaa.classList.remove("d-xl-block");
-	aaa.style.display="none";
+	document.querySelector(".floatLegend").style.display="none"
+	document.querySelector(".floatLegend").classList.remove("d-xl-block");
+	document.querySelector('.myLegend').classList.remove("d-xl-block","d-none");
+	document.querySelector('.myLegend').style.display="none";
 	}
 	document.getElementById('lotdetails').innerHTML = '<p>Click on a lot for details...</p>';
-	document.querySelector(".mobileDescHeader").style.display="none";		
+	document.querySelector(".mobileDescHeader").style.display="none";	
 	for (let i = 0, c = e.currentTarget.children; i < c.length; i++) {
-		let vLLAttrib= c[i].attributes["data-ll"].value  ;		
-		if (e.target == c[i] ) {
+		let vLLAttrib= (c[i].attributes["data-ll"])? c[i].attributes["data-ll"].value:null  ;		
+	if (!vLLAttrib) {continue;}
+	if (e.target == c[i] ) {
 			c[i].classList.add("selectedLL");
 			map.setLayoutProperty(vLLAttrib,"visibility","visible")	
 			document.querySelector(".map-overlay h6").innerHTML = " LOCAL LAW " +  c[i].attributes["data-dispname"].value+ " ELIGIBLE LOTS";
@@ -111,12 +111,12 @@ vAllBBL
 				map.on('load', function () {
 					map.addSource('_97Source', {
 						'type': 'geojson',
-						'data': 'data/LL97_ExceptionsRemoved.json', 
+						'data': 'data/LL97_BBLs.json', 
 						'generateId': true 
 					})
 					map.addSource('_33Source', {
 						'type': 'geojson',
-						'data': 'data/LL84_LetterGrade.json',
+						'data': 'data/LL84.json',
 						'generateId': true
 					});
 					map.addLayer({
@@ -223,13 +223,23 @@ map.on('click', function(e) {
 		'<p>'+'BBL: ' +lots_geojson[0].properties.BBL_MapPLU +	'</p>' +
 		'<p>'+'Borough: ' +lots_geojson[0].properties.BoroughNam+'</p>' + 
 		'<p>'+'Block: ' +lots_geojson[0].properties.Block_1 + 
-		'<p>'+'Lot: ' +lots_geojson[0].properties.Lot_1 +'</p>' +'</p>' +
+		'<p>'+'Lot: ' +lots_geojson[0].properties.Lot_1 +'</p>'  +
+		
 		'<p>'+'Address: ' + lots_geojson[0].properties.Street_Num + " " +lots_geojson[0].properties.Street_Nam + '</p>' +
+		
+		
 		'<p>'+'Number of Buildings: ' +lots_geojson[0].properties.Building_1 + '</p>'	+ 
 		'<p>'+'Gross Square Footage: ' +lots_geojson[0].properties.DOF_Gross_ + '</p>' + 
 		'<p>'+'Building Class: ' +lots_geojson[0].properties.Building_C + '</p>' + 
 		'<p>'+'Tax Class: ' +lots_geojson[0].properties.Tax_Class + '</p>' + 		
-		((lots_geojson[0].properties.LetterGrad   ) ? '<p>'+'Letter Grade: ' +lots_geojson[0].properties.LetterGrad : "");
+		(  (lots_geojson[0].properties.LetterGrad   ) ? '<p>'+
+		"Energy Efficiency Rating: &#9;" + 
+		lots_geojson[0].properties.LetterGrad + 
+		"<span class=''> / " + 
+		lots_geojson[0].properties.EnergyStar + 
+		"</span></p>" 
+		
+		: "");
 	  } else {
 		document.getElementById('lotdetails').innerHTML = '<p>Click on a lot for details...</p>';
 		map.setFeatureState({source: '_33Source', id: clickStateId}, { click: false});
