@@ -116,7 +116,7 @@ vAllBBL
 					})
 					map.addSource('_33Source', {
 						'type': 'geojson',
-						'data': 'data/LL84.json',
+						'data': 'data/LL84_LetterGrade.json',
 						'generateId': true
 					});
 					map.addLayer({
