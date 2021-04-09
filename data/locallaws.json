@@ -76,32 +76,9 @@
       "name": "33",
       "dispname": "33",
       "desc": "Local Law 33 of 2018 amended the Administrative Code of the City of New York in relation to energy efficiency scores and grades for buildings required to benchmark their energy and water consumption. Energy efficiency scores and grades for these buildings shall be obtained, assigned and disclosed in accordance with the new section §28-309.12 annually, based on benchmarking reporting consistent with Federal energy efficiency standards.",
-      "who": [
-         {
-            "description": "description #1"
-         },
-         {
-            "description": "description #2"
-         },
-         {
-            "description": "description #3"
-         },
-         {
-            "description": "description #4"
-         }
-      ],
+      "who": [],
       "year": 2018,
       "start": "1/1/2020",
-      "exceptions": [
-         {
-            "description": "exception #1"
-         },
-         {
-            "description": "exception #2"
-         },
-         {
-            "description": "exception #3"
-         }
-      ]
+      "exceptions": [ ]
    }
 ]
