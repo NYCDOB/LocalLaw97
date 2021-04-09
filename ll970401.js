@@ -87,18 +87,28 @@ let vLocalLaw = new Promise( function(resolve,reject) {
 						(item) =>{item.innerHTML = locallaws[x].dispname;})	
 					document.querySelector(".infoContent").appendChild(cc)
 					document.querySelector(".ll" + locallaws[x].name + " .lead em").innerHTML=locallaws[x].desc ;
+				
+				
+					if ( locallaws[x].who.length > 0 ) {					
 					for (let ctr=0,t=locallaws[x].who.length;ctr<t;ctr++) {
 						let el=document.createElement("li");
 						let elcontent=document.createTextNode(locallaws[x].who[ctr].description);
 						el.appendChild(elcontent);
 						document.querySelector(".ll" + locallaws[x].name + " #who ol").appendChild(el);
 					}
+					} else {
+						document.querySelector(".ll" + locallaws[x].name + " #who").innerHTML=document.querySelector(".ll" + locallaws[x].name + " #who").innerHTML+" tbd"
+					}
+					if (locallaws[x].exceptions.length > 0) {					
 					for (let ctr=0,t=locallaws[x].exceptions.length;ctr<t;ctr++) {
 						let el=document.createElement("li");
 						let elcontent=document.createTextNode(locallaws[x].exceptions[ctr].description);
 						el.appendChild(elcontent);
 						document.querySelector(".ll" + locallaws[x].name + " #exceptions ol").appendChild(el);
 					};
+					} else {
+						document.querySelector(".ll" + locallaws[x].name + " #exceptions").innerHTML=document.querySelector(".ll" + locallaws[x].name + " #exceptions").innerHTML+" tbd"
+					}				
 					if ( document.querySelector(".selectedLL").getAttribute("data-ll") == locallaws[x].name  )  {
 						document.querySelector(".ll" + locallaws[x].name).style.display="block";
 					}
