@@ -68,8 +68,8 @@ hideMobileInfo.addEventListener("click", (e) => {
 var map = new mapboxgl.Map({container: 'map',style: 'mapbox://styles/mapbox/dark-v10',center: [-73.973136,40.731069],zoom: 12});
 var clickStateId = null;
 let vLocalLaw = new Promise( function(resolve,reject) {
-	//let infocontent = 'data/locallaws.json';
-	let infocontent = 'data/locallawsDraft.json';
+	let infocontent = 'data/locallaws.json';
+	//let infocontent = 'data/locallawsDraft.json';
 	let rq = new XMLHttpRequest();
 	rq.open('GET', infocontent);
 	rq.responseType = 'json';
