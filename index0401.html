@@ -16,9 +16,10 @@
 	margin-left:10px;
 	cursor:pointer;
 }
-.lead {
-	font-size: 1em !important;		
+.map-overlay {
+overflow-y:auto
 }
+.lead{font-size:1em !important;}
 </style>
 </head>
 <body>
@@ -47,33 +48,31 @@
 		</div>
 		<div class="overlayParent">
 			<div class='map-overlay'>
-					<h6 class="font-weight-bold aboutHead">LOCAL LAW <span class="llnumspan"></span> ELIGIBLE LOTS</h6>
-					<div id='lotdetails'> <p>Click on a lot for details...</p>
-					</div>
+			<h6 class="font-weight-bold aboutHead">Local Law <span class="llnumspan"></span> <span class="msg">Lot Information</span></h6>
+			<div id='lotdetails'> <p>Click on a lot for details...</p>
 			</div>
-						<div id='geocoder' class='geocoder xlgeocoder'>
 			</div>
-
+			<div id='geocoder' class='geocoder xlgeocoder'>
+			</div>
 			<div class='myLegend geocoder'>
-						<div style="color:black;display:flex;justify-content:center;">
-							<b>ENERGY EFFICIENCY SCORE </b>
-						</div>
-						<div style="background-color: #4367AD;">
-								A: ENERGY STAR RATING >= 85
-						</div>						
-						<div style="background-color: #93C5DE; ">
-								B: ENERGY STAR RATING >= 70 AND &#60; 85
-						</div>
-						<div style="background-color: #F6851F;">
-								C: ENERGY STAR RATING >= 55 AND &#60; 70
-						</div>
-						<div style="background-color:#C31E28;">
-								D: ENERGY STAR RATING &#60; 55
-						</div>
-						<div style="background-color: #E6E600;color:black;">
-								<!-- F: BUILDINGS THAT HAVE NOT SUBMITTED REQUIRED BENCHMARKING INFORMATION  -->
-								F: REQUIRED BENCHMARKING INFORMATION NOT SUBMITTED
-						</div>
+			<div style="color:black;display:flex;justify-content:center;">
+				<b>ENERGY EFFICIENCY SCORE </b>
+			</div>
+			<div style="background-color: #4367AD;">
+					A: ENERGY STAR RATING >= 85
+			</div>						
+			<div style="background-color: #93C5DE; ">
+					B: ENERGY STAR RATING >= 70 AND &#60; 85
+			</div>
+			<div style="background-color: #F6851F;">
+					C: ENERGY STAR RATING >= 55 AND &#60; 70
+			</div>
+			<div style="background-color:#C31E28;">
+					D: ENERGY STAR RATING &#60; 55
+			</div>
+			<div style="background-color: #E6E600;color:black;">
+					F: REQUIRED BENCHMARKING INFORMATION NOT SUBMITTED
+			</div>
 			</div>			
 		</div>
 			<div class="row desktopDescFloat d-none d-xl-block">
@@ -115,24 +114,24 @@
 				</div>																				
 			</div>	
 <div class="floatLegend">
-	<div style="color:black;">
-	<b>EFFICIENCY LEGEND </b>
-	</div>
-	<div style="background-color: #4367AD;">
-	A: 85 - 100
-	</div>						
-	<div style="background-color: #93C5DE; ">
-	B: 70 - 84
-	</div>
-	<div style="background-color: #F6851F;">
-	C: 55 - 69
-	</div>
-	<div style="background-color:#C31E28;">
-	D: 0 - 54
-	</div>
-	<div style="background-color: #E6E600;color:black;">
-	F: NOT SUBMITTED
-	</div>			
+<div style="color:black;">
+<b>EFFICIENCY LEGEND </b>
+</div>
+<div style="background-color: #4367AD;">
+A: 85 - 100
+</div>						
+<div style="background-color: #93C5DE; ">
+B: 70 - 84
+</div>
+<div style="background-color: #F6851F;">
+C: 55 - 69
+</div>
+<div style="background-color:#C31E28;">
+D: 0 - 54
+</div>
+<div style="background-color: #E6E600;color:black;">
+F: NOT SUBMITTED
+</div>			
 </div>
 <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.js'></script>
 <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.min.js'></script>
@@ -141,7 +140,7 @@
 <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
 <script src="https://unpkg.com/geojson-vt@3.2.0/geojson-vt.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="ll970401.js"></script>
+<script src="ll97.js"></script>
 <script>
 </script>
 </body>
