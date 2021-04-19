@@ -239,7 +239,7 @@ map.on('click', function(e) {
 		'<p>'+'Gross Square Footage: ' +lots_geojson[0].properties.DOF_Gross_ + '</p>' + 
 		'<p>'+'Building Class: ' +lots_geojson[0].properties.Building_C + '</p>' + 
 		'<p>'+'Tax Class: ' +lots_geojson[0].properties.Tax_Class + '</p>' + 	
-		((lots_geojson[0].properties.DCAS_City) ? '<p>'+"City-owned: "+ ( (lots_geojson[0].properties.DCAS_City=="Y") ? "Yes":"No") + "</p>" : "")+
+		// ((lots_geojson[0].properties.DCAS_City) ? '<p>'+"City-owned: "+ ( (lots_geojson[0].properties.DCAS_City=="Y") ? "Yes":"No") + "</p>" : "")+
 		((lots_geojson[0].properties.dobnyc_G_1) ? '<p>'+
 		"Energy Efficiency Score: "+lots_geojson[0].properties.dobnyc_G_1 + "</p>" 
 		: "");
