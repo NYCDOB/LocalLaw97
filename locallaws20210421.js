@@ -62,9 +62,18 @@ if (e.target.nodeName=="SPAN"){
 			map.removeFeatureState({source: "_97Source"})  								
 			map.removeFeatureState({source: "_33Source"})  								
 			document.querySelector(".ll"+vLLAttrib).style.display="block";
-			document.querySelectorAll(".llnumspan").forEach( function(item) {
-				item.innerHTML=document.querySelector(".selectedLL").getAttribute("data-dispname");
-			})			
+			
+			//document.querySelectorAll(".llnumspan").forEach( function(item) {
+			//	item.innerHTML=document.querySelector(".selectedLL").getAttribute("data-dispname");
+			//})	
+			let _vtemp=document.querySelectorAll(".llnumspan");
+			for (let x=0; x <_vtemp.length; x++) {
+				_vtemp[x].innerHTML=document.querySelector(".selectedLL").getAttribute("data-dispname");
+			}
+
+
+
+			
 		} else {
 			c[i].classList.remove("selectedLL");
 			map.setLayoutProperty(vLLAttrib,"visibility","none");
@@ -94,9 +103,17 @@ let vLocalLaw = new Promise( function(resolve,reject) {
 					cc.classList.remove("shell");
 					cc.classList.add("ll"+locallaws[x].name);					
 					cc.setAttribute("dispname",locallaws[x].dispname);	
-					document.querySelectorAll(".llnumspan").forEach( function(item) {
-					  item.innerHTML = locallaws[x].dispname;
-					  })
+					
+					// document.querySelectorAll(".llnumspan").forEach( function(item) {
+					//   item.innerHTML = locallaws[x].dispname;
+					// })
+					 let _vtemp = document.querySelectorAll(".llnumspan");
+					 for ( let x = 0 ; x < _vtemp.length ; x++) {
+						_vtemp[x].innerHTML = locallaws[x].dispname;
+					 }
+					 
+					 
+					  
 					let cMsg = document.createElement("span")	;
 					cMsg.className="msg"+locallaws[x].dispname;
 					cMsg.innerHTML = locallaws[x].headerInfoMsg;
@@ -227,17 +244,35 @@ map.on("click", "33", function(e) {
 		map.setFeatureState({source: '_33Source', id: clickStateId}, { click: true});
 	} 
 });
+
+	/*
 	document.querySelectorAll(".switchLocalLawShown").forEach(
-		function (el) {
-			
-			let qt=el.getAttribute("data-ll");
-			
-			if ( el.classList.contains("selectedLL") ) {
-				map.setLayoutProperty(qt,'visibility','visible');
-			} else {
-				map.setLayoutProperty(qt,'visibility','none');
-			}
-		})})})
+				function (el) {
+					
+					let qt=el.getAttribute("data-ll");
+					
+					if ( el.classList.contains("selectedLL") ) {
+						map.setLayoutProperty(qt,'visibility','visible');
+					} else {
+						map.setLayoutProperty(qt,'visibility','none');
+					}
+				})
+	*/				
+    let _vtemp = document.querySelectorAll(".switchLocalLawShown");
+	for (let x=0;  x < _vtemp.length; x++ ) {
+					let qt=_vtemp[x].getAttribute("data-ll");
+					if ( _vtemp[x].classList.contains("selectedLL") ) {
+						map.setLayoutProperty(qt,'visibility','visible');
+					} else {
+						map.setLayoutProperty(qt,'visibility','none');
+					}
+	}
+
+
+				
+		})})
+		
+		
 	.catch ( function(error) { console.log(error)});
 map.on('click', function(e) {
   var lots_geojson = map.queryRenderedFeatures(e.point, {
