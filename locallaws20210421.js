@@ -108,8 +108,8 @@ let vLocalLaw = new Promise( function(resolve,reject) {
 					//   item.innerHTML = locallaws[x].dispname;
 					// })
 					 let _vtemp = document.querySelectorAll(".llnumspan");
-					 for ( let x = 0 ; x < _vtemp.length ; x++) {
-						_vtemp[x].innerHTML = locallaws[x].dispname;
+					 for ( let xt = 0 ; xt < _vtemp.length ; xt++) {
+						_vtemp[xt].innerHTML = locallaws[x].dispname;
 					 }
 					 
 					 
