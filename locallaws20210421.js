@@ -13,14 +13,22 @@ document.querySelector("[class*='fa-chevron']").title="Show"	;
 } else {
 document.querySelector(".infoContent").style.display="block";
 document.querySelector(".desktopDescFloat").style.height="700px";					
-e.target.classList.replace("fa-chevron-down","fa-chevron-up");					
+
+//e.target.classList.replace("fa-chevron-down","fa-chevron-up");					
+e.target.classList.remove("fa-chevron-down");
+e.target.classList.add("fa-chevron-up");				
+
+
 document.querySelector("[class*='fa-chevron']").title="Collapse";
 }});
 showMobileInfo=document.querySelector(".mobileDescFloat");
 	showMobileInfo.addEventListener("click", function(e) {
 	(document.querySelector(".infoContentR")) ? document.querySelector(".infoContentR").remove():true;
 	cc= document.querySelector(".infoContent").cloneNode(true);
-	cc.classList.replace("infoContent","infoContentR");
+	
+	//cc.classList.replace("infoContent","infoContentR");
+	cc.classList.remove("infoContent");
+	cc.classList.add("infoContentR");
 	cc.style.display="block";
 	document.querySelector(".mobileDescHeader").appendChild(cc)
 	document.querySelector(".mobileDescHeader").style.display="flex";
@@ -82,7 +90,9 @@ let vLocalLaw = new Promise( function(resolve,reject) {
 	  if ( locallaws[0] ) {
 			for (let x=locallaws.length-1 ; x > -1;x--) {
 					cc= document.querySelector(".shell").cloneNode(true);
-					cc.classList.replace("shell","ll"+locallaws[x].name);					
+					//cc.classList.replace("shell","ll"+locallaws[x].name);					
+					cc.classList.remove("shell");
+					cc.classList.add("ll"+locallaws[x].name);					
 					cc.setAttribute("dispname",locallaws[x].dispname);	
 					document.querySelectorAll(".llnumspan").forEach( function(item) {
 					  item.innerHTML = locallaws[x].dispname;
