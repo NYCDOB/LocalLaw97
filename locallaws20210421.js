@@ -1,6 +1,6 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoiYm1hbmNlbGwiLCJhIjoiY2oxZ24yd3E2MDAzdDJ3cG1jenB2dTl3cSJ9.38jhDPw4NnOpKK2mMmF_xQ';
 hideshowDesktop=document.querySelector("[class*='fa-chevron']:not(.legendicon)");
-hideshowDesktop.addEventListener("click", (e) => {
+hideshowDesktop.addEventListener("click", function(e) {
 if (e.target.classList.contains("fa-chevron-up")	)  {
 e.target.classList.replace("fa-chevron-up","fa-chevron-down");				
 document.querySelector(".desktopDescFloat").style.height="40px";
@@ -13,7 +13,7 @@ e.target.classList.replace("fa-chevron-down","fa-chevron-up");
 document.querySelector("[class*='fa-chevron']").title="Collapse";
 }});
 showMobileInfo=document.querySelector(".mobileDescFloat");
-	showMobileInfo.addEventListener("click",(e) =>{
+	showMobileInfo.addEventListener("click", function(e) {
 	(document.querySelector(".infoContentR")) ? document.querySelector(".infoContentR").remove():true;
 	cc= document.querySelector(".infoContent").cloneNode(true);
 	cc.classList.replace("infoContent","infoContentR");
@@ -25,7 +25,7 @@ showMobileInfo=document.querySelector(".mobileDescFloat");
 	behavior: "smooth",block: "start",inline: "start"});
 });
 mapButtonDiv = document.querySelector(".mapButtonDiv");
-mapButtonDiv.addEventListener("click", (e) => {	
+mapButtonDiv.addEventListener("click", function(e) {	
 if (e.target.nodeName=="SPAN"){	
 	if (e.target.getAttribute("data-dispname") == "33") {
 	document.querySelector('.myLegend').classList.add("d-xl-block","d-none");
@@ -50,7 +50,7 @@ if (e.target.nodeName=="SPAN"){
 			map.removeFeatureState({source: "_97Source"})  								
 			map.removeFeatureState({source: "_33Source"})  								
 			document.querySelector(".ll"+vLLAttrib).style.display="block";
-			document.querySelectorAll(".llnumspan").forEach((item)=>{
+			document.querySelectorAll(".llnumspan").forEach( function(item) {
 				item.innerHTML=document.querySelector(".selectedLL").getAttribute("data-dispname");
 			})			
 		} else {
@@ -60,7 +60,7 @@ if (e.target.nodeName=="SPAN"){
 }}}});
 var hoveredStateId = null;
 hideMobileInfo=document.querySelector(".fa-times-circle");
-hideMobileInfo.addEventListener("click", (e) => {
+hideMobileInfo.addEventListener("click", function (e) {
 	(document.querySelector(".infoContentR")) ? document.querySelector(".infoContentR").remove()  : true ;
 	document.querySelector(".mobileDescHeader").style.display="none";
 	window.scrollTo(0,0);
@@ -80,7 +80,9 @@ let vLocalLaw = new Promise( function(resolve,reject) {
 					cc= document.querySelector(".shell").cloneNode(true);
 					cc.classList.replace("shell","ll"+locallaws[x].name);					
 					cc.setAttribute("dispname",locallaws[x].dispname);	
-					document.querySelectorAll(".llnumspan").forEach((item) =>{item.innerHTML = locallaws[x].dispname;})
+					document.querySelectorAll(".llnumspan").forEach( function(item) {
+					  item.innerHTML = locallaws[x].dispname;
+					  })
 					let cMsg = document.createElement("span")	;
 					cMsg.className="msg"+locallaws[x].dispname;
 					cMsg.innerHTML = locallaws[x].headerInfoMsg;
@@ -116,7 +118,7 @@ let vLocalLaw = new Promise( function(resolve,reject) {
 }});
 let vAllBBL = Promise.all([ vLocalLaw]);	
 vAllBBL
-	.then((filterArray) => {
+	.then( function(filterArray) {
 				map.on('load', function () {
 					map.addSource('_97Source', {
 						'type': 'geojson',
@@ -212,7 +214,7 @@ map.on("click", "33", function(e) {
 	} 
 });
 	document.querySelectorAll(".switchLocalLawShown").forEach(
-		(el) => {
+		function (el) {
 			
 			let qt=el.getAttribute("data-ll");
 			
@@ -222,7 +224,7 @@ map.on("click", "33", function(e) {
 				map.setLayoutProperty(qt,'visibility','none');
 			}
 		})})})
-	.catch ((error)=>{ console.log(error)});
+	.catch ( function(error) { console.log(error)});
 map.on('click', function(e) {
   var lots_geojson = map.queryRenderedFeatures(e.point, {
     layers: ['97', '33']
