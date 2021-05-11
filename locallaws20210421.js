@@ -2,7 +2,11 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiYm1hbmNlbGwiLCJhIjoiY2oxZ24yd3E2MDAzdDJ3cG1je
 hideshowDesktop=document.querySelector("[class*='fa-chevron']:not(.legendicon)");
 hideshowDesktop.addEventListener("click", function(e) {
 if (e.target.classList.contains("fa-chevron-up")	)  {
-e.target.classList.replace("fa-chevron-up","fa-chevron-down");				
+
+//e.target.classList.replace("fa-chevron-up","fa-chevron-down");				
+e.target.classList.remove("fa-chevron-up");
+e.target.classList.add("fa-chevron-down");	
+			
 document.querySelector(".desktopDescFloat").style.height="40px";
 document.querySelector(".infoContent").style.display="none";
 document.querySelector("[class*='fa-chevron']").title="Show"	;				
