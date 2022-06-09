@@ -115,7 +115,8 @@ var map = new mapboxgl.Map({
 });
 var clickStateId = null;
 let vLocalLaw = new Promise(function (resolve, reject) {
-  let infocontent = "https://nycdob.github.io/LocalLaw97/data/locallaws.json";
+  let infocontent =
+    "https://nycdob.github.io/LocalLaw97/data/locallaws20220609.json";
   let rq = new XMLHttpRequest();
   rq.open("GET", infocontent);
   rq.responseType = "json";
