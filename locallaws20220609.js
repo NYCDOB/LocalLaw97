@@ -1,4 +1,4 @@
-mapboxgl.accessToken =
+mapboxgl.accessToken = 
   "pk.eyJ1IjoiYm1hbmNlbGwiLCJhIjoiY2oxZ24yd3E2MDAzdDJ3cG1jenB2dTl3cSJ9.38jhDPw4NnOpKK2mMmF_xQ";
 hideshowDesktop = document.querySelector(
   "[class*='fa-chevron']:not(.legendicon)"
