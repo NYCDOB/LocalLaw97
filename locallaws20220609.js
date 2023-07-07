@@ -213,7 +213,7 @@ vAllBBL
       });
       map.addSource("_33Source", {
         type: "geojson",
-        data: "https://nycdob.github.io/LocalLaw97/data/LL3320220609.json",
+        data: "https://nycdob.github.io/LocalLaw97/data/LL33_MapPLUTO_23v1_070723.json",
         generateId: true,
       });
       map.addLayer({
